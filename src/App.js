@@ -1,10 +1,11 @@
-const { default: DataContainer } = require('./components/DataContainer');
+import React from 'react';
+import DashboardContainer from './components/Dashboard/DashboardContainer';
 
 function App() {
   return (
-    <div className='App'>
+    <div className='App container'>
       <h1>Codehub React App</h1>
-      <DataContainer />
+      <DashboardContainer />
     </div>
   );
 }
