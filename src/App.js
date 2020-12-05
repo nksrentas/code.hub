@@ -4,7 +4,7 @@ import DashboardContainer from './components/Dashboard/DashboardContainer';
 function App() {
   return (
     <div className='App container'>
-      <h1>Codehub React App</h1>
+      <h1>Navigation</h1>
       <DashboardContainer />
     </div>
   );

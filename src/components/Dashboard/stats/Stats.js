@@ -1,14 +1,17 @@
 import React from 'react';
 import { Row, Col } from 'reactstrap';
+import Loading from '../../Loading';
 import StatCard from './StatCard';
 
 const Stats = ({ stats }) => {
-  console.log(stats);
+  if (!stats) {
+    return <Loading />;
+  }
   return (
     <Row>
       {stats.map((stat) => (
-        <Col>
-          <StatCard stat={stat} key={stat.id} />
+        <Col key={stat.id}>
+          <StatCard stat={stat} />
         </Col>
       ))}
     </Row>
