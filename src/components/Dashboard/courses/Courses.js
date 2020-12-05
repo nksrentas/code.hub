@@ -17,9 +17,9 @@ const Courses = ({ courses }) => {
 
   const sortedData = sortData(courses);
   return (
-    <div className='mt-5'>
-      <Row className='bg-light py-4'>
-        <h5 className='text-secondary ml-3'>Last 5 Courses</h5>
+    <div className='mt-5 bg-light'>
+      <Row className='py-3'>
+        <h5 className='text-secondary ml-5'>Last 5 Courses</h5>
       </Row>
       <Table className='table-striped'>
         <thead>
@@ -42,10 +42,10 @@ const Courses = ({ courses }) => {
               })}
         </tbody>
       </Table>
-      <Row className='d-flex justify-content-end bg-light py-4'>
+      <Row className='d-flex justify-content-end py-4'>
         <Button
           color='primary'
-          className='mr-3'
+          className='mr-5'
           onClick={() => setIsExpand((prev) => !prev)}
         >
           View all
