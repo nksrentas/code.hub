@@ -23,6 +23,23 @@
   ],
   "courses": [
     {
+      "id": "06",
+      "title": "Bootstrap",
+      "imagePath": "/react.png",
+      "price": {
+        "normal": 500,
+        "early_bird": 450
+      },
+      "dates": {
+        "start_date": "2018-10-19",
+        "end_date": "2018-10-10"
+      },
+      "duration": "2 Fridays and 4 Saturdays",
+      "open": true,
+      "instructors": ["01"],
+      "description": "<p>This is a certified program by Athens Tech College, the first educational institution in Greece that specialises in computer science and ICT studies.</p><p>Participant’s registration (payment’s completion) implies full compliance and acceptance of Code.Learn Terms &amp; Conditions.</p>"
+    },
+    {
       "id": "01",
       "title": "Certified Scrum Master®",
       "imagePath": "/scrum.png",
@@ -52,7 +69,7 @@
         "end_date": "2020-10-27"
       },
       "duration": "4 Fridays and 4 Saturdays",
-      "open": true,
+      "open": false,
       "instructors": ["01", "02"],
       "description": "<p>Do you want to <strong>design products based on opinions or based on evidence</strong>?</p><p>In this course you will learn how <strong>UX research</strong> builds products that users really need, can and want to use!</p>"
     },
@@ -76,6 +93,23 @@
     {
       "id": "04",
       "title": "React",
+      "imagePath": "/react.png",
+      "price": {
+        "normal": 500,
+        "early_bird": 450
+      },
+      "dates": {
+        "start_date": "2018-10-19",
+        "end_date": "2018-10-10"
+      },
+      "duration": "2 Fridays and 4 Saturdays",
+      "open": true,
+      "instructors": ["01"],
+      "description": "<p>This is a certified program by Athens Tech College, the first educational institution in Greece that specialises in computer science and ICT studies.</p><p>Participant’s registration (payment’s completion) implies full compliance and acceptance of Code.Learn Terms &amp; Conditions.</p>"
+    },
+    {
+      "id": "05",
+      "title": "Vue",
       "imagePath": "/react.png",
       "price": {
         "normal": 500,

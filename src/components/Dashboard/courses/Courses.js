@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Loading from '../../Loading';
-import { Table } from 'reactstrap';
+import { Table, Button, Row } from 'reactstrap';
 import TableRow from './TableRow';
 
+const sortData = (courses) => {
+  return courses.sort((a, b) => {
+    return new Date(b.dates.start_date) - new Date(a.dates.start_date);
+  });
+};
+
 const Courses = ({ courses }) => {
+  const [isExpand, setIsExpand] = useState(false);
   if (!courses) {
     return <Loading />;
   }
+
+  const sortedData = sortData(courses);
   return (
     <div className='mt-5'>
-      <h5 className='text-secondary'>Last 5 Courses</h5>
-      <Table>
+      <Row className='bg-light py-4'>
+        <h5 className='text-secondary ml-3'>Last 5 Courses</h5>
+      </Row>
+      <Table className='table-striped'>
         <thead>
           <tr>
             <th></th>
@@ -22,11 +33,24 @@ const Courses = ({ courses }) => {
           </tr>
         </thead>
         <tbody>
-          {courses.map((course) => {
-            return <TableRow data={course} />;
-          })}
+          {isExpand
+            ? sortedData.map((course) => {
+                return <TableRow data={course} key={course.id} />;
+              })
+            : sortedData.slice(0, 5).map((course) => {
+                return <TableRow data={course} key={course.id} />;
+              })}
         </tbody>
       </Table>
+      <Row className='d-flex justify-content-end bg-light py-4'>
+        <Button
+          color='primary'
+          className='mr-3'
+          onClick={() => setIsExpand((prev) => !prev)}
+        >
+          View all
+        </Button>
+      </Row>
     </div>
   );
 };
