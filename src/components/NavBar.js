@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -23,10 +24,10 @@ const NavBar = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink to="/courses">Courses</NavLink>
+              <NavLink tag={Link} to="/courses">Courses</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/new">Add new course</NavLink>
+              <NavLink tag={Link} to="/new">Add new course</NavLink>
             </NavItem>
           </Nav>
         </Collapse>
