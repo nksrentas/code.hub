@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Badge} from 'reactstrap';
 import Loading from '../../Loading';
-import CCard from './CourseCard';
+import CourseCard from './CourseCard';
 
 
 const CoursesP = ({ courses }) => {
@@ -15,7 +15,7 @@ const CoursesP = ({ courses }) => {
     <Row>
         {courses.map((course) => (
             <Col sm="4" className="mb-5" key={course.id}>
-                <CCard course={course} />
+                <CourseCard course={course} />
             </Col>
         ))}
     </Row>

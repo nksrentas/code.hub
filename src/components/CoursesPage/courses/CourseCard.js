@@ -15,14 +15,7 @@ const CourseCard = ({ course }) => {
             year : 'numeric'
         }).split(' ').join('/');
     }
-    let date = new Date(course.dates.start_date).toLocaleDateString('el-GR', {
-        day : 'numeric',
-        month : 'numeric',
-        year : 'numeric'
-    }).split(' ').join('/');
-    // date = date.toLocaleFormat('%d-%b-%Y');
-    
-    console.log(date)
+
     return (
         <>    
         <Card >
