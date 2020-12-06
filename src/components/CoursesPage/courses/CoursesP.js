@@ -1,7 +1,8 @@
 import React from 'react';
 import { Row, Col, Badge} from 'reactstrap';
 import Loading from '../../Loading';
-import CCard from './CCard';
+import CCard from './CourseCard';
+
 
 const CoursesP = ({ courses }) => {
     if (!courses) {
@@ -10,7 +11,7 @@ const CoursesP = ({ courses }) => {
 
     return (
     <>
-    <h2><Badge color="secondary">All Courses</Badge></h2>
+    <h2><Badge color="info" pill className="mb-2  " >All Courses</Badge></h2>
     <Row>
         {courses.map((course) => (
             <Col sm="4" className="mb-5" key={course.id}>
