@@ -25,7 +25,7 @@
     {
       "id": "06",
       "title": "Bootstrap",
-      "imagePath": "/react.png",
+      "imagePath": "/bootstrap.png",
       "price": {
         "normal": 500,
         "early_bird": 450
