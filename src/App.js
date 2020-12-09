@@ -2,20 +2,22 @@ import React from 'react';
 import DashboardContainer from './components/Dashboard/DashboardContainer.js';
 import NavBar from './components/NavBar';
 import CoursesContainer from './components/CoursesPage/CoursesContainer.js';
-import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import AddCourse from './components/AddCourse/AddCourse.js';
 
 function App() {
   return (
     <div className='App'>
       <Router>
-        <NavBar/>
+        <NavBar />
         <div className='App container'>
           <Switch>
-            <Route exact path="/" component={DashboardContainer}/>
-            <Route path="/courses" component={CoursesContainer}/>                  
+            <Route exact path='/' component={DashboardContainer} />
+            <Route path='/courses' component={CoursesContainer} />
+            <Route path='/new' component={AddCourse} />
           </Switch>
         </div>
-      </Router>    
+      </Router>
     </div>
   );
 }
