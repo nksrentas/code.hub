@@ -5,8 +5,19 @@ import {
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faCheck,faTimes  } from '@fortawesome/free-solid-svg-icons';
+import Details from '../../Details';
+import { useHistory } from "react-router-dom";
 
 const CourseCard = ({ course }) => {
+    const history = useHistory();
+
+    const routeChange = (course) =>{ 
+        history.push({ 
+            pathname: '/details',
+            state: {course}
+        });
+        console.log({course})
+    }
 
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString('el-GR', {
@@ -32,7 +43,7 @@ const CourseCard = ({ course }) => {
                         <ListGroupItem >Dates: <b className="text-muted " >{formatDate(course.dates.start_date)} - {formatDate(course.dates.end_date)} </b></ListGroupItem>
                     </ListGroup>
                 </CardText>
-                <Button className="float-right">View</Button>
+                <Button className="float-right" onClick={() => routeChange(course)}>View</Button>
             </CardBody>
         </Card>
     </>
