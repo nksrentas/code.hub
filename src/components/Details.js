@@ -1,42 +1,133 @@
-import React from 'react'
+import React,  { useState } from 'react'
 import { useLocation } from 'react-router-dom'; 
-import { Breadcrumb, BreadcrumbItem,Media,Col,Row,Button} from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem,Media,Col,Row,Button,Table,Popover, PopoverHeader, PopoverBody} from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faCheck,faTimes,faBan,faInfoCircle,faTag,faCalendarAlt,faFileSignature  } from '@fortawesome/free-solid-svg-icons';
+import grabData from '../hooks/grabData';
+import Loading from './Loading';
+import { Card, CardTitle, CardText, CardImg, CardImgOverlay,Alert } from 'reactstrap';
 
 const Details = () => {
+    const instructor = grabData('instructors');
+  
     const location = useLocation();
-    const p=location.state.course;
-    console.log(p);
+    const course=location.state.course;
+
+
+    const formatDate = (date) => {
+      return new Date(date).toLocaleDateString('el-GR', {
+          day : 'numeric',
+          month : 'numeric',
+          year : 'numeric'
+      }).split(' ').join('/');
+    }
+
+
+    if (!instructor) {
+      return <Loading />;
+    }
+
+    const id_filter = course.instructors;
+    const filtered_instructor = instructor.find(function(item) {
+      return id_filter.indexOf(item.id);
+  });
+  
 
     return (
     <>  
-    <Breadcrumb>
-        <BreadcrumbItem><a href="/courses">Courses</a></BreadcrumbItem>
-        <BreadcrumbItem active>{p.title}</BreadcrumbItem>
-    </Breadcrumb>
-    <h3>{p.title} ({p.id})</h3>
-    <Media src={p.imagePath} />
-    
-    <Col>
-      <Media >
-        <Media object data-src={p.imagePath} fluid="xl" />
-      </Media>
+    <div>
+      <Card inverse>
+        <CardImg width="100%" src="../background-image.jpg" alt="Card image cap" />
+        <CardImgOverlay className="d-flex" style={{alignItems:"center"}}>
+            <Col xs="4" className="pl-0">                
+              <Media object src={course.imagePath} style={{width: "90%"}} />
+            </Col>  
+            <Col xs="8">
+              <Media body>
+                <Media heading>
+                  <h1>{course.title}</h1>
+                </Media>
+                {course.open ? (                 
+                      <Alert color="success" className="ml-5">
+                        <h4 className="alert-heading ">Enrollment is Open! </h4>
+                      </Alert>) :
+                      (<Alert color="danger" className="ml-5">
+                      <h5>Enrollment is Closed <FontAwesomeIcon icon={faBan} color='red' /></h5>
+                      </Alert>
+                )}
+              </Media>
+            </Col>
+        </CardImgOverlay>
+      </Card>
+    </div>
+
+    <Card body >
+    <Row className="mt-3">
+      <Col md="8" style={{textAlign:"justify"}} >      
+        <CardTitle tag="h4" style={{color: "#2471A3"}}>Description – Motivation</CardTitle>
+        <CardText><div dangerouslySetInnerHTML={{__html: course.description}} /></CardText>      
       </Col>
-      <Row>
-        <Col xs="11">Price: {p.price.normal}</Col>
-        <Col xs="1">Duration:</Col>
-      </Row>
-      <Row>
-        <Col xs="11">Bookable: </Col>
-        <Col  xs="1">Dates: </Col>
-      </Row>
-      <Row>{p.description}</Row>
-      <Row>
-      <Button className="float-right">Edit</Button>
-      <Button className="float-right">Delete</Button>
-      </Row>
-    <h3>Instructors</h3>
-    <h4></h4>
-    <Col xs="11">Email: </Col>
+      <Col md="4">
+        <Table  responsive >
+          <tbody>
+          <tr>
+              
+              <td scope="row"><FontAwesomeIcon icon={faInfoCircle} color='#2471A3' /> Course Number</td>
+              <th style={{ textAlign: 'right' }}>{course.id}</th>
+            </tr>
+            <tr>
+              <td scope="row"><FontAwesomeIcon icon={faCalendarAlt} color='#2471A3' /> Classes Start</td>
+              <th style={{ textAlign: 'right' }}>{formatDate(course.dates.start_date)} </th>
+            </tr>
+            <tr>
+              <td scope="row"><FontAwesomeIcon icon={faCalendarAlt} color='#2471A3' /> Classes End</td>
+              <th style={{ textAlign: 'right' }}>{formatDate(course.dates.end_date)} </th>
+            </tr>
+            <tr>
+              <td scope="row"><FontAwesomeIcon icon={faTag} color='#2471A3' /> Cost of attendance</td>
+              <th style={{ textAlign: 'right' }}>{course.price.normal}€</th>
+            </tr>
+            <tr>
+              <td scope="row"><FontAwesomeIcon icon={faFileSignature} color='#2471A3' /> Bookable:</td>
+              <th style={{ textAlign: 'right' }}>{course.open ? (
+                                        <FontAwesomeIcon icon={faCheck} color='green' />)
+                                        : (<FontAwesomeIcon icon={faTimes} color='red' />
+                )}</th>
+            </tr>
+          </tbody>
+        </Table> 
+        </Col>
+        </Row>
+        <Row>
+        <Col md="8" style={{textAlign:"justify"}} >      
+          <CardTitle tag="h4" style={{color: "#2471A3"}}>Duration</CardTitle>
+          <CardText>This specific Code.Learn program lasts {course.duration}.</CardText>      
+        </Col>
+        </Row>
+        <Row className="mt-3">
+        <Col md="8" style={{textAlign:"justify"}} >      
+          <CardTitle tag="h4" style={{color: "#2471A3"}}>Instructors</CardTitle>      
+        </Col>
+        </Row>
+        <Row>
+          <Col md="11">
+            <Button color="info">Edit</Button>        
+          </Col>
+          <Col md="1">
+            <Button color="danger" >Delete</Button>
+          </Col>
+        </Row>
+        
+        
+    </Card>
+
+    
+      
+      
+      
+      
+    
+    
     </>
     );
 };
