@@ -1,18 +1,16 @@
-import React,  { useState } from 'react'
+import React from 'react'
 import { useLocation } from 'react-router-dom'; 
-import { Breadcrumb, BreadcrumbItem,Media,Col,Row,Button,Table,Popover, PopoverHeader, PopoverBody} from 'reactstrap';
+import { Media,Col,Row,Button,Table} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faCheck,faTimes,faBan,faInfoCircle,faTag,faCalendarAlt,faFileSignature  } from '@fortawesome/free-solid-svg-icons';
+import {  faCheck,faTimes,faBan,faInfoCircle,faTag,faCalendarAlt,faFileSignature,faUserTie  } from '@fortawesome/free-solid-svg-icons';
 import grabData from '../hooks/grabData';
 import Loading from './Loading';
 import { Card, CardTitle, CardText, CardImg, CardImgOverlay,Alert } from 'reactstrap';
 
 const Details = () => {
-    const instructor = grabData('instructors');
-  
+    const instructor = grabData('instructors');  
     const location = useLocation();
-    const course=location.state.course;
-
+    const course=location.state.course; 
 
     const formatDate = (date) => {
       return new Date(date).toLocaleDateString('el-GR', {
@@ -22,16 +20,15 @@ const Details = () => {
       }).split(' ').join('/');
     }
 
-
     if (!instructor) {
       return <Loading />;
     }
 
     const id_filter = course.instructors;
-    const filtered_instructor = instructor.find(function(item) {
-      return id_filter.indexOf(item.id);
+    const filtered_instructor = instructor.filter(function(item) {
+      return id_filter.includes(item.id);
   });
-  
+
 
     return (
     <>  
@@ -70,8 +67,7 @@ const Details = () => {
       <Col md="4">
         <Table  responsive >
           <tbody>
-          <tr>
-              
+          <tr>              
               <td scope="row"><FontAwesomeIcon icon={faInfoCircle} color='#2471A3' /> Course Number</td>
               <th style={{ textAlign: 'right' }}>{course.id}</th>
             </tr>
@@ -106,10 +102,30 @@ const Details = () => {
         </Row>
         <Row className="mt-3">
         <Col md="8" style={{textAlign:"justify"}} >      
-          <CardTitle tag="h4" style={{color: "#2471A3"}}>Instructors</CardTitle>      
+          <CardTitle tag="h4" style={{color: "#2471A3"}}>Instructors</CardTitle> 
+          {filtered_instructor.map(instructor => 
+          <Row className="mt-3">
+            <Col>
+            <CardTitle tag="h5" ><FontAwesomeIcon icon={faUserTie} color='#515A5A' />
+            {' '}{instructor.name.first} {instructor.name.last} 
+            <h6 style={{color: "#2471A3"}}>{instructor.bio}</h6>
+            </CardTitle>
+            <CardText>
+            <Button outline disabled style={{opacity: "1"}}><strong>Email: </strong>{instructor.email} </Button>{' '}
+
+            
+            <Button outline color="primary">Linkedin</Button>
+            </CardText>
+            
+            
+            </Col>
+            
+          </Row>
+            )}
         </Col>
         </Row>
-        <Row>
+
+        <Row className="mt-3">
           <Col md="11">
             <Button color="info">Edit</Button>        
           </Col>
@@ -120,14 +136,6 @@ const Details = () => {
         
         
     </Card>
-
-    
-      
-      
-      
-      
-    
-    
     </>
     );
 };
