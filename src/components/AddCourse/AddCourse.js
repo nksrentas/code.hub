@@ -5,8 +5,10 @@ import FormCustomMultiCheck from './FormCustomMultiCheck';
 import FormCustomTextInput from './FormCustomTextInput';
 import axios from 'axios';
 import { API_URL } from '../../config';
+import { useHistory } from 'react-router-dom';
 
 const AddCourse = () => {
+  let history = useHistory();
   const [formData, setFormData] = useState({
     title: '',
     duration: '',
@@ -31,6 +33,7 @@ const AddCourse = () => {
       .post(`${API_URL}/courses`, formData)
       .then((res) => {
         console.log('Post response', res);
+        history.push('/courses');
       })
       .catch((err) => {
         console.error(err);
@@ -106,6 +109,7 @@ const AddCourse = () => {
             type='textarea'
             name='text'
             id='exampleText'
+            rows='7'
             onChange={(e) => updateFormData({ description: e.target.value })}
           />
         </FormGroup>
