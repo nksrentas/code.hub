@@ -3,6 +3,7 @@ import axios from 'axios';
 import { API_URL } from '../config';
 
 const GrabData = (endpoint) => {
+  console.log('custom hook');
   const [data, setData] = useState();
   useEffect(() => {
     axios

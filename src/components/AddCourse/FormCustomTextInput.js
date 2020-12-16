@@ -8,7 +8,6 @@ const FormCustomTextInput = ({ title, type, name, value, setValue }) => {
       <Input
         type={type}
         name={name}
-        id='exampleEmail'
         value={value}
         placeholder={title}
         onChange={(e) => setValue({ [name]: e.target.value })}

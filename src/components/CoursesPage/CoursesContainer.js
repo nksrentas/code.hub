@@ -4,10 +4,10 @@ import CoursesP from './../CoursesPage/courses/CoursesP.js';
 
 const CoursesContainer = () => {
   const courses = grabData('courses');
-  
-  return (    
+
+  return (
     <>
-      <CoursesP courses={courses} /> 
+      <CoursesP courses={courses} />
     </>
   );
 };

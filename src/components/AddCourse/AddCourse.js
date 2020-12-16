@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Form, Jumbotron, Label } from 'reactstrap';
+import { Button, Form, Jumbotron, Label, Input, FormGroup } from 'reactstrap';
 import FormCustomCheckInput from './FormCustomCheckInput';
 import FormCustomMultiCheck from './FormCustomMultiCheck';
 import FormCustomTextInput from './FormCustomTextInput';
+import axios from 'axios';
+import { API_URL } from '../../config';
 
 const AddCourse = () => {
   const [formData, setFormData] = useState({
@@ -13,8 +15,8 @@ const AddCourse = () => {
     instructors: [],
     description: '',
     price: {
-      normal: null,
-      early_bird: null,
+      normal: 0,
+      early_bird: 0,
     },
     dates: {
       start_date: '',
@@ -22,18 +24,31 @@ const AddCourse = () => {
     },
   });
 
+  const handleSudmit = (e) => {
+    e.preventDefault();
+    // post request
+    axios
+      .post(`${API_URL}/courses`, formData)
+      .then((res) => {
+        console.log('Post response', res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   const updateFormData = (newValueObject) => {
     setFormData({
       ...formData,
       ...newValueObject,
     });
   };
+
   const handleChange = (event) => {
     const value = event.target.value;
     const checked = event.target.checked;
 
     setFormData((prevState) => {
-      console.log(prevState.instructors);
       let instructors = prevState.instructors;
       if (checked) {
         instructors.push(value);
@@ -54,7 +69,7 @@ const AddCourse = () => {
   const instructors = ['Jonh Tsevdos', 'Yiannis Nikolakopoulos'];
   return (
     <Jumbotron>
-      <Form>
+      <Form onSubmit={handleSudmit}>
         <h2>Add Course</h2>
         {formDataArray.slice(0, 3).map((formInput, index) => {
           let firstUpper =
@@ -62,7 +77,7 @@ const AddCourse = () => {
           return (
             <FormCustomTextInput
               key={index}
-              title={`${firstUpper}: `}
+              title={`${firstUpper} `}
               name={formInput}
               type='text'
               value={formData[formInput]}
@@ -85,6 +100,77 @@ const AddCourse = () => {
           onChange={handleChange}
         />
         <hr />
+        <FormGroup>
+          <Label for='exampleText'>Description</Label>
+          <Input
+            type='textarea'
+            name='text'
+            id='exampleText'
+            onChange={(e) => updateFormData({ description: e.target.value })}
+          />
+        </FormGroup>
+        <hr />
+        <h2>Dates</h2>
+        <FormGroup>
+          <Label for='start-date'>Start date</Label>
+          <Input
+            type='text'
+            name='start-date'
+            value={formData.dates.start_date}
+            placeholder='Start date'
+            onChange={(e) =>
+              updateFormData({
+                dates: { ...formData.dates, start_date: e.target.value },
+              })
+            }
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for='end-date'>End date</Label>
+          <Input
+            type='text'
+            name='end-date'
+            value={formData.dates.end_date}
+            placeholder='End date'
+            onChange={(e) =>
+              updateFormData({
+                dates: { ...formData.dates, end_date: e.target.value },
+              })
+            }
+          />
+        </FormGroup>
+        <h2>Price</h2>
+        <FormGroup>
+          <Label for='early_bird'>Early Bird</Label>
+          <Input
+            type='number'
+            name='early_bird'
+            value={formData.price.early_bird}
+            onChange={(e) =>
+              updateFormData({
+                price: { ...formData.price, early_bird: e.target.value },
+              })
+            }
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for='price'>Normal price</Label>
+          <Input
+            type='number'
+            name='price'
+            value={formData.price.normal}
+            placeholder='End date'
+            onChange={(e) =>
+              updateFormData({
+                price: { ...formData.price, normal: e.target.value },
+              })
+            }
+          />
+        </FormGroup>
+        <hr />
+        <Button type='submit' color='primary' className='float-right'>
+          Add course
+        </Button>
       </Form>
     </Jumbotron>
   );
