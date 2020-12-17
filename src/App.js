@@ -4,7 +4,7 @@ import NavBar from './components/NavBar';
 import CoursesContainer from './components/CoursesPage/CoursesContainer.js';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AddCourse from './components/AddCourse/AddCourse.js';
-import Details from './components/Details'
+import DetailsContainer from './components/DetailsPage/DetailsContainer.js';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
             <Route exact path='/' component={DashboardContainer} />
             <Route path='/courses' component={CoursesContainer} />
             <Route path='/new' component={AddCourse} />
-            <Route path='/details' component={Details} />
+            <Route path='/details' component={DetailsContainer} />
           </Switch>
         </div>
       </Router>
