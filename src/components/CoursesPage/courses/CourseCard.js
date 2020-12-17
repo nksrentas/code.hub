@@ -5,8 +5,8 @@ import {
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {  faCheck,faTimes  } from '@fortawesome/free-solid-svg-icons';
-import Details from '../../Details';
 import { useHistory } from "react-router-dom";
+import FormatDate from '../../FormatDate'
 
 const CourseCard = ({ course }) => {
     const history = useHistory();
@@ -19,13 +19,6 @@ const CourseCard = ({ course }) => {
         console.log({course})
     }
 
-    const formatDate = (date) => {
-        return new Date(date).toLocaleDateString('el-GR', {
-            day : 'numeric',
-            month : 'numeric',
-            year : 'numeric'
-        }).split(' ').join('/');
-    }
 
     return (
         <>    
@@ -40,7 +33,12 @@ const CourseCard = ({ course }) => {
                 <CardText>
                     <ListGroup flush>
                         <ListGroupItem>Duration: <b  className="text-muted">{course.duration}</b></ListGroupItem>
-                        <ListGroupItem >Dates: <b className="text-muted " >{formatDate(course.dates.start_date)} - {formatDate(course.dates.end_date)} </b></ListGroupItem>
+                        <ListGroupItem >Dates: <b className="text-muted " >
+                            <FormatDate date={course.dates.start_date}></FormatDate>
+                            {'-'}
+                            <FormatDate date={course.dates.end_date}></FormatDate>
+                            {/* {formatDate(course.dates.start_date)} - {formatDate(course.dates.end_date)} */}
+                            </b></ListGroupItem>
                     </ListGroup>
                 </CardText>
                 <Button className="float-right" onClick={() => routeChange(course)}>View</Button>
