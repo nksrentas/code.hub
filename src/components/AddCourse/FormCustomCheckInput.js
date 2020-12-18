@@ -8,6 +8,7 @@ const FormCustomCheckInput = ({ title, name, value, setValue }) => {
         <Input
           type='checkbox'
           name={name}
+          checked={value}
           onChange={(e) => setValue({ [name]: e.target.checked })}
         />
         {title}

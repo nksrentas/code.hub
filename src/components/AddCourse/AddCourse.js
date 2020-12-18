@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import { Button, Form, Jumbotron, Label, Input, FormGroup } from 'reactstrap';
 import FormCustomCheckInput from './FormCustomCheckInput';
 import FormCustomMultiCheck from './FormCustomMultiCheck';
@@ -7,24 +7,43 @@ import axios from 'axios';
 import { API_URL } from '../../config';
 import { useHistory } from 'react-router-dom';
 
-const AddCourse = () => {
+const AddCourse = forwardRef((props, ref) => {
   let history = useHistory();
-  const [formData, setFormData] = useState({
-    title: '',
-    duration: '',
-    imagePath: '',
-    open: false,
-    instructors: [],
-    description: '',
-    price: {
-      normal: 0,
-      early_bird: 0,
+  let { initialState } = props;
+
+  let data = initialState
+    ? initialState
+    : {
+        title: '',
+        duration: '',
+        imagePath: '',
+        open: false,
+        instructors: [],
+        description: '',
+        price: {
+          normal: 0,
+          early_bird: 0,
+        },
+        dates: {
+          start_date: '',
+          end_date: '',
+        },
+      };
+  const [formData, setFormData] = useState(data);
+
+  useImperativeHandle(ref, () => ({
+    kappa: () => {
+      axios
+        .put(`${API_URL}/courses/${formData.id}`, formData)
+        .then((res) => {
+          console.log('Post response', res);
+          history.push('/courses');
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     },
-    dates: {
-      start_date: '',
-      end_date: '',
-    },
-  });
+  }));
 
   const handleSudmit = (e) => {
     e.preventDefault();
@@ -73,7 +92,7 @@ const AddCourse = () => {
   return (
     <Jumbotron>
       <Form onSubmit={handleSudmit}>
-        <h2>Add Course</h2>
+        <h2>{initialState ? 'Edit Course' : 'Add Course'}</h2>
         {formDataArray.slice(0, 3).map((formInput, index) => {
           let firstUpper =
             formInput.charAt(0).toUpperCase() + formInput.slice(1);
@@ -110,6 +129,7 @@ const AddCourse = () => {
             name='text'
             id='exampleText'
             rows='7'
+            value={formData.description}
             onChange={(e) => updateFormData({ description: e.target.value })}
           />
         </FormGroup>
@@ -171,13 +191,19 @@ const AddCourse = () => {
             }
           />
         </FormGroup>
-        <hr />
-        <Button type='submit' color='primary' className='float-right'>
-          Add course
-        </Button>
+        {initialState ? (
+          ''
+        ) : (
+          <div>
+            <hr />
+            <Button type='submit' color='primary' className='float-right'>
+              Add course
+            </Button>
+          </div>
+        )}
       </Form>
     </Jumbotron>
   );
-};
+});
 
 export default AddCourse;
