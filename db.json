@@ -37,9 +37,10 @@
       "duration": "2 Fridays and 4 Saturdays",
       "open": true,
       "instructors": [
-        "01"
+        "01",
+        "02"
       ],
-      "description": "<p>This is a certified program by Athens Tech College, the first educational institution in Greece that specialises in computer science and ICT studies.</p><p>Participant’s registration (payment’s completion) implies full compliance and acceptance of Code.Learn Terms &amp; Conditions.</p>"
+      "description": "<p>This is a certified program by Athens Tech College, the first educational institution in Greece that specialises in computer science and ICT studies.</p><p>Participant’s registration (payment’s completion) implies full compliance and acceptance of Code.Learn Terms &amp; Conditions.</p>\nkappa keepo"
     },
     {
       "id": "01",

@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import EditCourse from '../Edit/EditCourse';
 
 const DetailsCourseDescription = ({ course, instructors }) => {
-  console.log(course, instructors);
   return (
     <>
       <Row className='mt-3'>
