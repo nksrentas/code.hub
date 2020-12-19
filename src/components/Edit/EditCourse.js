@@ -19,7 +19,10 @@ const EditCourse = ({ course }) => {
           <AddCourse initialState={course} ref={childRef} />
         </ModalBody>
         <ModalFooter>
-          <Button color='primary' onClick={() => childRef.current.kappa()}>
+          <Button
+            color='primary'
+            onClick={() => childRef.current.kappa(toggle)}
+          >
             Submit
           </Button>{' '}
           <Button color='secondary' onClick={toggle}>

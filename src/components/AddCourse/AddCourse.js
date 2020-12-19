@@ -32,11 +32,12 @@ const AddCourse = forwardRef((props, ref) => {
   const [formData, setFormData] = useState(data);
 
   useImperativeHandle(ref, () => ({
-    kappa: () => {
+    kappa: (toggle) => {
       axios
         .put(`${API_URL}/courses/${formData.id}`, formData)
         .then((res) => {
           console.log('Post response', res);
+          toggle();
           history.push('/courses');
         })
         .catch((err) => {
