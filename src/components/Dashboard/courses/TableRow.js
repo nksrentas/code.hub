@@ -1,13 +1,24 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory } from "react-router-dom";
 import {
   faCheck,
   faInfoCircle,
   faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 
+
 const TableRow = ({ data }) => {
+  const history = useHistory();
+    const routeChange = (data) =>{ 
+        const course=data
+        history.push({ 
+            pathname: '/details',
+            state: {course}
+        });
+    }
+    
   return (
     <tr>
       <td>
@@ -26,7 +37,7 @@ const TableRow = ({ data }) => {
         {data.dates.start_date} - {data.dates.end_date}
       </td>
       <td>
-        <Button color='info'>View details</Button>
+        <Button color='info' onClick={() => routeChange(data)}>View details</Button>
       </td>
     </tr>
   );
