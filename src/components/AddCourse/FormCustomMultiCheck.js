@@ -8,8 +8,10 @@ const FormCustomMultiCheck = ({ options, name, array, onChange }) => {
         <Label style={{ textTransform: 'capitalize' }} check>
           <Input
             type='checkbox'
-            value={index + 1}
+            value={`0${index + 1}`}
             name={name}
+            // eslint-disable-next-line eqeqeq
+            checked={array.some((elem) => elem == index + 1)}
             onChange={onChange}
           />
           {option}
