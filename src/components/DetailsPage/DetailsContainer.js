@@ -5,7 +5,6 @@ import grabData from '../../hooks/grabData';
 import Loading from '../Loading';
 import DetailsHeaderImage from './DetailsHeaderImage';
 import DetailsCourseDescription from './DetailsCourseDescription';
-import { parse } from '@fortawesome/fontawesome-svg-core';
 
 const DetailsContainer = () => {
   const location = useLocation();
@@ -20,8 +19,6 @@ const DetailsContainer = () => {
   const course_instructors = instructor.filter(function (item) {
     return id_filter.includes(item.id);
   });
-
-  console.log(course_instructors);
 
   return (
     <>

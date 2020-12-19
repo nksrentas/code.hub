@@ -1,10 +1,9 @@
 import React from 'react';
-import { Col, Row, Button, Table } from 'reactstrap';
+import { Col, Row, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { CardTitle, CardText } from 'reactstrap';
 import DetailsCourseTable from './DetailsCourseTable';
-import { Link } from 'react-router-dom';
 import EditCourse from '../Edit/EditCourse';
 
 const DetailsCourseDescription = ({ course, instructors }) => {
@@ -16,9 +15,7 @@ const DetailsCourseDescription = ({ course, instructors }) => {
           <CardTitle tag='h4' style={{ color: '#2471A3' }}>
             Description – Motivation
           </CardTitle>
-          <CardText>
-            <div dangerouslySetInnerHTML={{ __html: course.description }} />
-          </CardText>
+          <div dangerouslySetInnerHTML={{ __html: course.description }} />
           {/* DURATION INFO */}
           <CardTitle tag='h4' style={{ color: '#2471A3' }}>
             Duration
@@ -30,13 +27,21 @@ const DetailsCourseDescription = ({ course, instructors }) => {
           <CardTitle tag='h4' style={{ color: '#2471A3' }}>
             Instructors
           </CardTitle>
-          {instructors.map((instructor) => (
-            <Row className='mt-3'>
+          {instructors.map((instructor, index) => (
+            <Row className='mt-3' key={instructor.id}>
               <Col>
                 <CardTitle tag='h5'>
                   <FontAwesomeIcon icon={faUserTie} color='#515A5A' />{' '}
                   {instructor.name.first} {instructor.name.last}
-                  <h6 style={{ color: '#2471A3' }}>{instructor.bio}</h6>
+                  <span
+                    style={{
+                      color: '#2471A3',
+                      display: 'block',
+                      fontSize: 'smaller',
+                    }}
+                  >
+                    {instructor.bio}
+                  </span>
                 </CardTitle>
                 <CardText>
                   <Button outline disabled style={{ opacity: '1' }}>
