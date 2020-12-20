@@ -13,10 +13,10 @@ function App() {
         <NavBar />
         <div className='App container'>
           <Switch>
-            <Route exact path='/' component={DashboardContainer} />
-            <Route path='/courses' component={CoursesContainer} />
+            <Route exact path='/' component={DashboardContainer} />                        
+            <Route exact path='/courses' component={CoursesContainer} />
+            <Route path ='/courses/:courseID' component={DetailsContainer}/>
             <Route path='/new' component={AddCourse} />
-            <Route path='/details' component={DetailsContainer} />
           </Switch>
         </div>
       </Router>
