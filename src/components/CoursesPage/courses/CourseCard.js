@@ -1,5 +1,9 @@
 import React from 'react';
 import {
+  Link,
+  useRouteMatch
+} from "react-router-dom";
+import {
   Card,
   CardImg,
   CardBody,
@@ -11,18 +15,11 @@ import {
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { useHistory } from 'react-router-dom';
 import FormatDate from '../../FormatDate';
 
-const CourseCard = ({ course }) => {
-  const history = useHistory();
 
-  const routeChange = (course) => {
-    history.push({
-      pathname: '/details',
-      state: { course },
-    });
-  };
+const CourseCard = ({ course }) => {
+  const { url } = useRouteMatch();
 
   return (
     <>
@@ -51,11 +48,13 @@ const CourseCard = ({ course }) => {
               </b>
             </ListGroupItem>
           </ListGroup>
-          <Button className='float-right' onClick={() => routeChange(course)}>
-            View
-          </Button>
+          <Link to={`${url}/`+ course.id}>
+            <Button className='float-right' > View </Button>
+          </Link>
         </CardBody>
       </Card>
+
+  
     </>
   );
 };
