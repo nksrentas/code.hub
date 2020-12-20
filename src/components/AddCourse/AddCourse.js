@@ -38,7 +38,8 @@ const AddCourse = forwardRef((props, ref) => {
         .then((res) => {
           console.log('Post response', res);
           toggle();
-          history.push('/courses');
+          window.location.reload(false);
+          //history.push('/courses');
         })
         .catch((err) => {
           console.error(err);
