@@ -5,6 +5,7 @@ import { faUserTie } from '@fortawesome/free-solid-svg-icons';
 import { CardTitle, CardText } from 'reactstrap';
 import DetailsCourseTable from './DetailsCourseTable';
 import EditCourse from '../Edit/EditCourse';
+import DeleteCourse from '../Delete/DeleteCourse';
 
 const DetailsCourseDescription = ({ course, instructors }) => {
   return (
@@ -61,11 +62,11 @@ const DetailsCourseDescription = ({ course, instructors }) => {
         </Col>
       </Row>
       <Row className='mt-3'>
-        <Col xs=''>
+        <Col>
           <EditCourse course={course} />
         </Col>
-        <Col >
-          <Button className="float-right" color='danger'>Delete</Button>
+        <Col>
+          <DeleteCourse course={course}/>
         </Col>
       </Row>
     </>
