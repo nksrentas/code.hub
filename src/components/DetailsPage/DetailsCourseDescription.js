@@ -10,7 +10,7 @@ const DetailsCourseDescription = ({ course, instructors }) => {
   return (
     <>
       <Row className='mt-3'>
-        <Col md='8' style={{ textAlign: 'justify' }}>
+        <Col md='7' lg='8' style={{ textAlign: 'justify' }}>
           {/* DESCRIPTION */}
           <CardTitle tag='h4' style={{ color: '#2471A3' }}>
             Description – Motivation
@@ -56,16 +56,16 @@ const DetailsCourseDescription = ({ course, instructors }) => {
             </Row>
           ))}
         </Col>
-        <Col md='4'>
+        <Col md='5' lg='4'>
           <DetailsCourseTable course={course} />
         </Col>
       </Row>
       <Row className='mt-3'>
-        <Col xs='11'>
+        <Col xs=''>
           <EditCourse course={course} />
         </Col>
-        <Col xs='1'>
-          <Button color='danger'>Delete</Button>
+        <Col >
+          <Button className="float-right" color='danger'>Delete</Button>
         </Col>
       </Row>
     </>
