@@ -5,15 +5,15 @@ import Loading from '../Loading';
 import DetailsHeaderImage from './DetailsHeaderImage';
 import DetailsCourseDescription from './DetailsCourseDescription';
 
-import { useParams} from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 const DetailsContainer = () => {
-  const {courseID} = useParams();
-  const course = grabData(`courses/${courseID}`)
+  const { courseID } = useParams();
+  const course = grabData(`courses/${courseID}`);
   const instructor = grabData('instructors');
 
   if (!course || !instructor) {
-    return  <Loading />;  
+    return <Loading />;
   }
 
   const id_filter = course.instructors;
